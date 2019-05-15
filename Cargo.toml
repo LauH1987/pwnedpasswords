@@ -1,0 +1,10 @@
+[package]
+name = "using_reqwest"
+version = "0.1.0"
+authors = ["Lau"]
+edition = "2018"
+
+[dependencies]
+reqwest = "0.9.16"
+error-chain = "0.12.1"
+sha-1 = "0.8.1"
