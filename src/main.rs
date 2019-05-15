@@ -3,7 +3,6 @@ extern crate error_chain;
 extern crate reqwest;
 extern crate sha1;
 
-use std::io::Read;
 use std::env;
 use std::collections::HashMap;
 use sha1::{Sha1, Digest};
@@ -24,9 +23,7 @@ fn request_pwd(pwd: &str) -> Result<Option<String>> {
 
     let req_string = format!("{}{}", "https://api.pwnedpasswords.com/range/", first_five);
 
-    let mut res = reqwest::get(&req_string)?;
-    let mut body = String::new();
-    res.read_to_string(&mut body)?;
+    let body = reqwest::get(&req_string)?.text()?;
 
     let pwd_map: HashMap<&str, &str> = body.lines()
         .map(|line| line.split(':').collect::<Vec<&str>>())
