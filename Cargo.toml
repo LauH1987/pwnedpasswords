@@ -1,7 +1,7 @@
 [package]
-name = "using_reqwest"
+name = "pwnedpasswords"
 version = "0.1.0"
-authors = ["Lau"]
+authors = ["LauH1987"]
 edition = "2018"
 
 [dependencies]
