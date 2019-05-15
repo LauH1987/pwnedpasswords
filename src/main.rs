@@ -1,33 +1,29 @@
-#[macro_use]
-extern crate error_chain;
 extern crate reqwest;
 extern crate sha1;
 
-use std::env;
+use sha1::{Digest, Sha1};
 use std::collections::HashMap;
-use sha1::{Sha1, Digest};
+use std::env;
 
-
-error_chain! {
-    foreign_links {
-        Io(std::io::Error);
-        HttpRequest(reqwest::Error);
-    }
-}
-
-fn request_pwd(pwd: &str) -> Result<Option<String>> {
+fn request_pwd(pwd: &str) -> Result<Option<String>, reqwest::Error> {
     let mut hasher = Sha1::new();
     hasher.input(pwd);
-    let hash_result = hasher.result().iter().map(|b| format!("{:02X}", b)).collect::<Vec<String>>().join("");
+    let hash_result = hasher
+        .result()
+        .iter()
+        .map(|b| format!("{:02X}", b))
+        .collect::<Vec<String>>()
+        .join("");
     let (first_five, rest) = hash_result.split_at(5);
 
     let req_string = format!("{}{}", "https://api.pwnedpasswords.com/range/", first_five);
-
     let body = reqwest::get(&req_string)?.text()?;
 
-    let pwd_map: HashMap<&str, &str> = body.lines()
+    let pwd_map: HashMap<&str, &str> = body
+        .lines()
         .map(|line| line.split(':').collect::<Vec<&str>>())
-        .map(|vec| (vec[0], vec[1])).collect();
+        .map(|vec| (vec[0], vec[1]))
+        .collect();
 
     let number_of_matches = pwd_map.get(rest).map(|s| s.to_string());
 

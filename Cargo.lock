@@ -1295,7 +1295,6 @@ dependencies = [
 name = "using_reqwest"
 version = "0.1.0"
 dependencies = [
- "error-chain 0.12.1 (registry+https://github.com/rust-lang/crates.io-index)",
  "reqwest 0.9.16 (registry+https://github.com/rust-lang/crates.io-index)",
  "sha-1 0.8.1 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
