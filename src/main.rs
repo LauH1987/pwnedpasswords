@@ -1,11 +1,9 @@
-extern crate reqwest;
-extern crate sha1;
-
+use reqwest::Result;
 use sha1::{Digest, Sha1};
 use std::collections::HashMap;
 use std::env;
 
-fn request_pwd(pwd: &str) -> Result<Option<String>, reqwest::Error> {
+fn request_pwd(pwd: &str) -> Result<Option<String>> {
     let mut hasher = Sha1::new();
     hasher.input(pwd);
     let hash_result = hasher
