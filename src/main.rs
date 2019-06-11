@@ -1,17 +1,12 @@
 use reqwest::Result;
-use sha1::{Digest, Sha1};
 use std::collections::HashMap;
 use std::env;
+use str_ext::Sha1Hash;
+
+mod str_ext;
 
 fn request_pwd(pwd: &str) -> Result<Option<String>> {
-    let mut hasher = Sha1::new();
-    hasher.input(pwd);
-    let hash_result = hasher
-        .result()
-        .iter()
-        .map(|b| format!("{:02X}", b))
-        .collect::<Vec<String>>()
-        .join("");
+    let hash_result = pwd.sha1_hash();
     let (first_five, rest) = hash_result.split_at(5);
 
     let req_string = format!("{}{}", "https://api.pwnedpasswords.com/range/", first_five);
@@ -19,12 +14,11 @@ fn request_pwd(pwd: &str) -> Result<Option<String>> {
 
     let pwd_map: HashMap<&str, &str> = body
         .lines()
-        .map(|line| line.split(':').collect::<Vec<&str>>())
-        .map(|vec| (vec[0], vec[1]))
+        .map(|line| line.split(':'))
+        .map(|mut iter| (iter.next().unwrap(), iter.next().unwrap()))
         .collect();
 
     let number_of_matches = pwd_map.get(rest).map(|s| s.to_string());
-
     Ok(number_of_matches)
 }
 
