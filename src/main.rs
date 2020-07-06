@@ -1,6 +1,5 @@
 use reqwest::Result;
 use std::collections::HashMap;
-use std::env;
 use str_ext::Sha1Hash;
 
 mod str_ext;
@@ -24,13 +23,9 @@ async fn request_pwd(pwd: &str) -> Result<Option<String>> {
 
 #[tokio::main]
 async fn main() {
-    let args: Vec<String> = env::args().collect();
-    let pwd = match args.get(1) {
-        Some(str) => str,
-        _ => panic!("No password given"),
-    };
+    let pwd = rpassword::prompt_password_stdout("Password: ").unwrap();
 
-    match request_pwd(pwd).await {
+    match request_pwd(&pwd).await {
         Ok(Some(matches)) => println!("Password matched {} times", matches),
         Ok(None) => println!("No matching password found"),
         _error => println!("Error trying to request server"),

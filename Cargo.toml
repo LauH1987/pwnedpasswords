@@ -8,3 +8,4 @@ edition = "2018"
 reqwest = "0.10.6"
 sha-1 = "0.9.1"
 tokio = { version = "0.2", features = ["macros"] }
+rpassword = "4.0.5"

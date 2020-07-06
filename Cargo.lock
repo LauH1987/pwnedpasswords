@@ -505,6 +505,7 @@ name = "pwnedpasswords"
 version = "0.1.0"
 dependencies = [
  "reqwest 0.10.6 (registry+https://github.com/rust-lang/crates.io-index)",
+ "rpassword 4.0.5 (registry+https://github.com/rust-lang/crates.io-index)",
  "sha-1 0.9.1 (registry+https://github.com/rust-lang/crates.io-index)",
  "tokio 0.2.21 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
@@ -665,6 +666,15 @@ dependencies = [
  "wasm-bindgen-futures 0.4.14 (registry+https://github.com/rust-lang/crates.io-index)",
  "web-sys 0.3.41 (registry+https://github.com/rust-lang/crates.io-index)",
  "winreg 0.7.0 (registry+https://github.com/rust-lang/crates.io-index)",
+]
+
+[[package]]
+name = "rpassword"
+version = "4.0.5"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+dependencies = [
+ "libc 0.2.71 (registry+https://github.com/rust-lang/crates.io-index)",
+ "winapi 0.3.7 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
 
 [[package]]
@@ -1141,6 +1151,7 @@ dependencies = [
 "checksum redox_syscall 0.1.54 (registry+https://github.com/rust-lang/crates.io-index)" = "12229c14a0f65c4f1cb046a3b52047cdd9da1f4b30f8a39c5063c8bae515e252"
 "checksum remove_dir_all 0.5.1 (registry+https://github.com/rust-lang/crates.io-index)" = "3488ba1b9a2084d38645c4c08276a1752dcbf2c7130d74f1569681ad5d2799c5"
 "checksum reqwest 0.10.6 (registry+https://github.com/rust-lang/crates.io-index)" = "3b82c9238b305f26f53443e3a4bc8528d64b8d0bee408ec949eb7bf5635ec680"
+"checksum rpassword 4.0.5 (registry+https://github.com/rust-lang/crates.io-index)" = "99371657d3c8e4d816fb6221db98fa408242b0b53bac08f8676a41f8554fe99f"
 "checksum rustc_version 0.2.3 (registry+https://github.com/rust-lang/crates.io-index)" = "138e3e0acb6c9fb258b19b67cb8abd63c00679d2851805ea151465464fe9030a"
 "checksum ryu 0.2.8 (registry+https://github.com/rust-lang/crates.io-index)" = "b96a9549dc8d48f2c283938303c4b5a77aa29bfbc5b54b084fb1630408899a8f"
 "checksum schannel 0.1.15 (registry+https://github.com/rust-lang/crates.io-index)" = "f2f6abf258d99c3c1c5c2131d99d064e94b7b3dd5f416483057f308fea253339"
