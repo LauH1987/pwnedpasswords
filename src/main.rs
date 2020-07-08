@@ -18,7 +18,7 @@ async fn request_pwd(pwd: &str) -> Result<Option<String>> {
         .map(|mut iter| (iter.next().unwrap(), iter.next().unwrap()))
         .collect();
 
-    let number_of_matches = pwd_map.get(rest).map(|s| s.to_string());
+    let number_of_matches = pwd_map.get(rest).map(|&s| s.to_string());
     Ok(number_of_matches)
 }
 
